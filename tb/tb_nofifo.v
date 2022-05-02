@@ -1,4 +1,4 @@
-`timescale 1ns / 1ps 
+`timescale 1ns / 1ps
 
 
 module tb_nofif();
@@ -8,15 +8,22 @@ reg clk;
 reg rst_n;
 always	#5	clk = ~clk;
 reg [7: 0] data_in;
+wire ready_o;
 
-always #15 data_in = data_in + 1'b1;
+always #15
+	begin
+		if (ready_o)
+			data_in = data_in + 1'b1;
+		else
+			data_in = data_in;
+	end
 
 
 reg valid_i;
 reg ready_i;
-wire ready_o;
+
 wire valid_o;
-wire [7:0] data_out;
+wire [7: 0] data_out;
 
 initial
 	begin
@@ -30,13 +37,13 @@ initial
 
 		#20
 		 rst_n <= 1'b1;
-         ready_i <= 1'b1;
-		 valid_i <= 1'b1;
+		ready_i <= 1'b1;
+		valid_i <= 1'b1;
 
-        #100
-        ready_i<=1'b0;
-        #150
-        ready_i<=1'b1;
+		#100
+		 ready_i <= 1'b0;
+		#150
+		 ready_i <= 1'b1;
 	end
 
 top_nofifo u_top_nofifo(
