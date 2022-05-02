@@ -39,7 +39,7 @@ always@(posedge clk or negedge rst_n or posedge busy)
 
 			end
 		else
-			begin //在检测到主机数据无效的时候，准备就绪接收数据
+			begin
 				ready <= (busy)?1'b0:(data_out_s == data_in_s) ? 1'b1 : 1'b0;
 				data_out_s	<= (valid_r == 1'b1&&busy==1'b0) ? data_in_s : data_out_s;
 			end

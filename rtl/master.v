@@ -62,6 +62,7 @@ always@(posedge clk or negedge rst_n)
 		
 	end
 
+//带fifo，逐渐反压
 fifo#(
     .depth    ( 60 ),
     .width    ( 8 )

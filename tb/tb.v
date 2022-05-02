@@ -8,12 +8,14 @@ reg valid;
 reg [7:0] data_in;
 wire [7:0] data_out;
 always	#5	clk = ~clk;
+//产生传输数据
 always #15 data_in = data_in + 1'b1;
 
 initial
 	begin
 		clk <= 1'b1;
 		rst_n <= 1'b0;
+        //busy信号控制接受端工作状态
 		busy <= 1'b0;
 		data_in <= 0;
 
