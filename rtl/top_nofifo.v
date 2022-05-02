@@ -3,7 +3,6 @@ module top_nofifo (
            input wire rst,
            input wire valid_i,
            input wire ready_i,
-
            input wire [7: 0] din,
 
            output wire [7: 0] dout,
@@ -45,8 +44,6 @@ always @ (posedge clk)
 	end
 
 assign ready_r1 = ~valid_r2 || ready_r2;
-
-
 
 always @ (posedge clk or negedge rst)
 	begin
